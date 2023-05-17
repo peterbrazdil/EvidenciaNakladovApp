@@ -1,0 +1,68 @@
+package sk.tmconsulting.evidencianakladov.service;
+
+import sk.tmconsulting.evidencianakladov.model.Naklad;
+
+import java.io.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
+public class NakladService implements INakladService {
+
+    @Override // "prepisane metody z inej triedy
+    public void uloz(Naklad naklad) {
+
+    }
+
+    @Override
+    public void uprav(Naklad naklad) {
+
+    }
+
+    @Override
+    public void zmaz(Naklad naklad) {
+
+    }
+
+    @Override
+    public void zobraz(Naklad naklad) {
+
+    }
+
+    @Override
+    public void zobrazVsetky(ArrayList<Naklad> zoznamNakladov) {
+
+    }
+
+    @Override
+    public double spocitajNakladyDatumuOdDo(LocalDate datumOd, LocalDate datumDo, ArrayList<Naklad> zoznamNakladov) {
+        return 0;
+    }
+
+    @Override
+    public void ulozDoSuboru(ArrayList<Naklad> zoznamNakladov, String nazovSuboru) throws IOException {
+        FileOutputStream fileOutputStream = new FileOutputStream(nazovSuboru); // vytvorime subor s nazvom kniha.ser
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); // vytvorime Object stream pre ukladanie objektov
+        objectOutputStream.writeObject(zoznamNakladov); // zapiseme objekt
+        objectOutputStream.flush(); // realne uskutocnime operaciu zapisu
+        objectOutputStream.close(); // zatvorime object output stream
+        fileOutputStream.close(); // zatvorime file output stream, cize subor
+    }
+
+    @Override
+    public ArrayList<Naklad> otvorZoSuboru(String nazovSuboru) throws IOException, ClassNotFoundException {
+        // nacitanie ArrayList
+        FileInputStream fileInputStream = new FileInputStream("kniznica.databaza");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        ArrayList<Naklad> zoznamNakladov = (ArrayList) objectInputStream.readObject();
+        objectInputStream.close();
+        fileInputStream.close();
+        return zoznamNakladov;
+    }
+
+
+    @Override
+    public void export2PDF(ArrayList<Naklad> zoznamNakladov) {
+
+
+    }
+}
