@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class NakladService implements INakladService {
 
-    @Override // "prepisane metody z inej triedy
+    @Override
     public void uloz(Naklad naklad) {
 
     }
@@ -38,6 +38,7 @@ public class NakladService implements INakladService {
         return 0;
     }
 
+
     @Override
     public void ulozDoSuboru(ArrayList<Naklad> zoznamNakladov, String nazovSuboru) throws IOException {
         FileOutputStream fileOutputStream = new FileOutputStream(nazovSuboru); // vytvorime subor s nazvom kniha.ser
@@ -51,18 +52,16 @@ public class NakladService implements INakladService {
     @Override
     public ArrayList<Naklad> otvorZoSuboru(String nazovSuboru) throws IOException, ClassNotFoundException {
         // nacitanie ArrayList
-        FileInputStream fileInputStream = new FileInputStream("kniznica.databaza");
+        FileInputStream fileInputStream = new FileInputStream(nazovSuboru);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-        ArrayList<Naklad> zoznamNakladov = (ArrayList) objectInputStream.readObject();
+        ArrayList<Naklad> zoznamNakladov = (ArrayList<Naklad>) objectInputStream.readObject();
         objectInputStream.close();
         fileInputStream.close();
         return zoznamNakladov;
     }
 
-
     @Override
     public void export2PDF(ArrayList<Naklad> zoznamNakladov) {
-
 
     }
 }

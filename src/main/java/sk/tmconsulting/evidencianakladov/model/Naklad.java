@@ -3,18 +3,18 @@ package sk.tmconsulting.evidencianakladov.model;
 import java.io.Serializable;
 import java.time.LocalDate;
 
-// Vytvarame model s nazvom Naklad. Terminologia pre model je aj POJO
+/* Vytvarame model s nazvom Naklad. Terminologia pre konkretny model je aj POJO */
 public class Naklad implements Serializable {
     private String nazov;
     private double cena;
     private Kategoria kategoria;
     private LocalDate datumZaznamu;
 
-// prazdny konstruktor
+    // Prazdny konstruktor
+    public Naklad() {
+    }
 
-    public Naklad() {    }
-
-    // konstuktor - ako ina moznost naplnenia pre naklad2, so 4mi parametrami tj Definovany konstruktor
+    // Konstruktor so 4-mi parametrami, t.j. Definovany (parametricky) konstruktor
     public Naklad(String nazov, double cena, Kategoria kategoria, LocalDate datumZaznamu) {
         this.nazov = nazov;
         this.cena = cena;
@@ -58,5 +58,15 @@ public class Naklad implements Serializable {
 
     public void setDatumZaznamu(LocalDate datumZaznamu) {
         this.datumZaznamu = datumZaznamu;
+    }
+
+    @Override
+    public String toString() {
+        return "Naklad{" +
+                "nazov='" + nazov + '\'' +
+                ", cena=" + cena +
+                ", kategoria=" + kategoria +
+                ", datumZaznamu=" + datumZaznamu +
+                '}';
     }
 }
