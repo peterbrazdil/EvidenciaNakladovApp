@@ -37,9 +37,9 @@ public class EvidenciaNakladovMain {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-/*
+
         GUI gui = new GUI();
-        gui.vytvor();*/
+        gui.vytvor();
 
     }
 }

@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 /* Vytvarame model s nazvom Naklad. Terminologia pre konkretny model je aj POJO */
 public class Naklad implements Serializable {
-    private static String nazov;
+    private String nazov;
     private double cena;
     private Kategoria kategoria;
     private LocalDate datumZaznamu;
