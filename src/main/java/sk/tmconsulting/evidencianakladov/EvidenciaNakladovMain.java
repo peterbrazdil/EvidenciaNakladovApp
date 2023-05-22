@@ -31,12 +31,12 @@ public class EvidenciaNakladovMain {
         naklady.add(naklad2);
         naklady.add(naklad3);
 
-        NakladService ns = new NakladService();
+/*        NakladService ns = new NakladService();
         try {
             ns.ulozDoSuboru(naklady, "naklady.ser");
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
+        }*/
 
         GUI gui = new GUI();
         gui.vytvor();
