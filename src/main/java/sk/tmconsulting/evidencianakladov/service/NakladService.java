@@ -40,6 +40,13 @@ public class NakladService implements INakladService {
 
     @Override
     public void ulozDoSuboru(ArrayList<Naklad> zoznamNakladov, String nazovSuboru) throws IOException {
+
+        System.out.println("Vypisujem konkretne náklady:");
+        // Vypisem vsetky naklady pri ukladani
+        for (Naklad konkretnyNaklad:zoznamNakladov) {
+            System.out.println(konkretnyNaklad);
+        }
+
         FileOutputStream fileOutputStream = new FileOutputStream(nazovSuboru); // vytvorime subor s nazvom kniha.ser
         ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream); // vytvorime Object stream pre ukladanie objektov
         objectOutputStream.writeObject(zoznamNakladov); // zapiseme objekt
