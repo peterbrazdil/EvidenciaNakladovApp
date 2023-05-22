@@ -62,11 +62,10 @@ public class Naklad implements Serializable {
 
     @Override
     public String toString() {
-        return "Naklad{" +
+        return "Naklad:" +
                 "nazov='" + nazov + '\'' +
                 ", cena=" + cena +
                 ", kategoria=" + kategoria +
-                ", datumZaznamu=" + datumZaznamu +
-                '}';
+                ", datumZaznamu=" + datumZaznamu;
     }
 }

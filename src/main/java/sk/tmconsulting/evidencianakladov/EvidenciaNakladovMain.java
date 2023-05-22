@@ -11,7 +11,7 @@ import java.util.ArrayList;
 
 public class EvidenciaNakladovMain {
     public static void main(String[] args) {
-        // Vytvorime si objekt s nazvom naklad1
+/*        // Vytvorime si objekt s nazvom naklad1
         Naklad naklad1 = new Naklad();
         naklad1.setNazov("Nákup potravín");
         naklad1.setCena(12.60);
@@ -29,7 +29,7 @@ public class EvidenciaNakladovMain {
         ArrayList<Naklad> naklady = new ArrayList<>(); // Vytvorili sme prazdny zoznam nakladov, teda dynamicke pole, ktore neobsahuje zatial ziadny naklad
         naklady.add(naklad1);
         naklady.add(naklad2);
-        naklady.add(naklad3);
+        naklady.add(naklad3);*/
 
 /*        NakladService ns = new NakladService();
         try {
@@ -40,6 +40,11 @@ public class EvidenciaNakladovMain {
 
         GUI gui = new GUI();
         gui.vytvor();
+
+        // TODO Rozbalovaci zoznam pre kategorie
+        // TODO Interaktivny kalendar
+        // TODO Pouzit jDialog na zadanie novych zaznamov
+
 
     }
 }

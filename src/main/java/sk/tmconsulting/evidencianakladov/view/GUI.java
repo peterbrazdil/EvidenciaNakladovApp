@@ -5,6 +5,7 @@ import sk.tmconsulting.evidencianakladov.model.Naklad;
 import sk.tmconsulting.evidencianakladov.service.NakladService;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -19,15 +20,15 @@ public class GUI {
     private Naklad vybranyNaklad;
     private DefaultListModel<Naklad> modelZoznamu;
     private JList<Naklad> jlist;
-    private ArrayList<Naklad> celkoveNaklady;
+    private ArrayList<Naklad> celkoveNaklady = new ArrayList<>();
 
     public void vytvor() {
 
-        JFrame frame = new JFrame("Evidencia nákladov"); // vytvorime okno
+        JFrame frame = new JFrame("Evidencia nákladov"); // Vytvorime okno
 
-        frame.setMinimumSize(new Dimension(450, 320));
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // ked kliknem na X na okne (cize vo frame) tak sa zatvori standardne
-        frame.setLocationRelativeTo(null); // vycentrovanie okna
+        frame.setMinimumSize(new Dimension(450, 320)); // Rozmery okna
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ked kliknem na X na okne (cize vo frame) tak sa zatvori standardne
+        frame.setLocationRelativeTo(null); // Vycentrovanie okna
 
         // JFrame by mal obsahovat panel, teda container JPanel
         JPanel panel = new JPanel();
@@ -54,7 +55,7 @@ public class GUI {
         // Pridanie menu baru do rámca
         frame.setJMenuBar(menuBar);
 
-        // ActionListener pre položku 1
+        // ActionListener pre položku 1, cize otvorenie suboru
         item1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -66,9 +67,9 @@ public class GUI {
                     for (Naklad konkretnyNaklad : celkoveNaklady) {
                         // Naplnenie modelu zoznamu objektmi z ArrayListu
                         System.out.println(konkretnyNaklad);
-                            modelZoznamu.addElement(konkretnyNaklad);
+                        modelZoznamu.addElement(konkretnyNaklad); // Naplnili sme zoznam udajov v jList ale cez DefaultListModel, teda modelZoznamu
                     }
-                    jlist.updateUI(); // Aktualizacia jList
+                    //jlist.updateUI(); // Aktualizacia, refresh jList
                 } catch (IOException e1) {
                     throw new RuntimeException(e1);
                 } catch (ClassNotFoundException e2) {
@@ -152,11 +153,47 @@ public class GUI {
         jScrollPane.setBounds(70, 80, 300, 150);
         panel.add(jScrollPane);
 
-        JButton btnUloz = new JButton("Potvrď"); // tlacidlo
-        btnUloz.setBounds(110, 240, 80, 20); // x, y, sirka, vyska
-        panel.add(btnUloz);
 
-        btnUloz.addActionListener(new ActionListener() { // sluzi na "odchytenie" cize spracovanie zatlacenia tlacidla
+        JButton btnNovy = new JButton("Nový"); // tlacidlo
+        btnNovy.setBounds(10, 240, 80, 20); // x, y, sirka, vyska
+        panel.add(btnNovy);
+        btnNovy.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Vyprazdnime hore formular pre vstupne udaje
+                txfNazov.setText(""); // Vymaze obsah jTextField pre nazov
+                txfKategoria.setText(""); // Vymaze obsah jTextField pre kategoria
+                txfCena.setText(""); // Vymaze obsah jTextField pre cena
+                txfDatum.setText(""); // Vymaze obsah jTextField pre datum
+
+                txfNazov.setBorder(new LineBorder(Color.BLUE, 2));
+                txfKategoria.setBorder(new LineBorder(Color.BLUE, 2));
+                txfCena.setBorder(new LineBorder(Color.BLUE, 2));
+                txfDatum.setBorder(new LineBorder(Color.BLUE, 2));
+
+                btnNovy.setEnabled(false);
+            }
+        });
+
+        JButton btnUloz = new JButton("Pridaj do zoznamu"); // tlacidlo
+        btnUloz.setBounds(100, 240, 90, 20); // x, y, sirka, vyska
+        panel.add(btnUloz);
+        btnUloz.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Metoda getText zo jTextField nam vzdy vrati obsah daneho grafickeho prvku (komponentu) vo forme textu
+                Naklad novyNaklad = new Naklad(txfNazov.getText(), Double.parseDouble(txfCena.getText()), Kategoria.valueOf(txfKategoria.getText()), LocalDate.parse(txfDatum.getText()));
+                modelZoznamu.addElement(novyNaklad);
+                celkoveNaklady.add(novyNaklad); // Musime doplnit novyNaklad do ArrayList-u celkoveNaklady, pretoze dany ArrayList ukladame
+                btnNovy.setEnabled(true);
+            }
+        });
+
+        JButton btnAktualizuj = new JButton("Aktualizuj"); // tlacidlo
+        btnAktualizuj.setBounds(200, 240, 80, 20); // x, y, sirka, vyska
+        panel.add(btnAktualizuj);
+
+        btnAktualizuj.addActionListener(new ActionListener() { // sluzi na "odchytenie" cize spracovanie zatlacenia tlacidla
             public void actionPerformed(ActionEvent e) {
                 vybranyNaklad.setNazov(txfNazov.getText());
                 vybranyNaklad.setCena(Double.parseDouble(txfCena.getText()));
@@ -168,7 +205,7 @@ public class GUI {
 
 
         JButton btnCancel = new JButton("Cancel");
-        btnCancel.setBounds(240, 240, 80, 20);
+        btnCancel.setBounds(290, 240, 80, 20);
         panel.add(btnCancel);
 
         btnCancel.addActionListener(new ActionListener() {
