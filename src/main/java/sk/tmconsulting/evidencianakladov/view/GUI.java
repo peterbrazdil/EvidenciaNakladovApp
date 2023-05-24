@@ -5,7 +5,6 @@ import sk.tmconsulting.evidencianakladov.model.Naklad;
 import sk.tmconsulting.evidencianakladov.service.NakladService;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
@@ -169,13 +168,13 @@ public class GUI {
                 // Vytvarame dialog, ktory patri rodicovskemu jFrame, teda v nasom pripade premennej frame.
                 // Nastavili sme zaroven jeho titulok na "novy zaznam" a treti parameter urcuje, ci je okno modalne (true) alebo nie (false)
                 JDialog popupOkno = new JDialog(frame, "Nový záznam", true);
-                popupOkno.setSize(400,300);
+                popupOkno.setSize(400, 300);
                 popupOkno.setLocationRelativeTo(frame); // Vycentrovanie okna voci frame
 
                 JPanel panelDialog = new JPanel();
                 // Layout je nastaveny na null, cize komponenty v jDialogu nastavujeme cez setBounds
                 panelDialog.setLayout(new FlowLayout());
-// Do JDialogu s nazvom popupOkno sme pridali panelDialog prostrednictvom metody setContentPane
+                // Do JDialogu s nazvom popupOkno sme pridali panelDialog prostrednictvom metody setContentPane
                 popupOkno.setContentPane(panelDialog);
                 panelDialog.setBackground(Color.GRAY);
 
@@ -183,12 +182,12 @@ public class GUI {
 
                 // Vytvarame jTextField pre jDialog
                 JTextField txfNazovDialog = new JTextField(5);
-               // txfNazovDialog.setBounds(50,30,100,20);
+                // txfNazovDialog.setBounds(50,30,100,20);
                 // Pridame txfNazovDialog do popupOkno
                 panelDialog.add(txfNazovDialog);
 
 
-              //  txfNazovDialog.setText(txfNazov.getText());
+                //  txfNazovDialog.setText(txfNazov.getText());
 
                 JTextField txfCenaDialog = new JTextField(5);
                 panelDialog.add(txfCenaDialog);
@@ -207,6 +206,7 @@ public class GUI {
                 // V metode actionPerformed musime urobit toto
                 // Vytvorit objekt Naklad s nazvom novyNaklad, kde vlozime vsetky hodnoty jTextField z jDialog
                 // a tento objekt novyNaklad pridame do jListe cez DefaultListModel takto: modelZoznamu.addElement(novyNaklad);
+
 
                 // Zobrazime jDialog
                 popupOkno.setVisible(true);
