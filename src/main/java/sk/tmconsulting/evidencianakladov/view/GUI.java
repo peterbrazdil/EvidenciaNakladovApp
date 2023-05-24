@@ -25,8 +25,11 @@ public class GUI {
     public void vytvor() {
 
         JFrame frame = new JFrame("Evidencia nákladov"); // Vytvorime okno
+/*        JDialog mojDialog = new JDialog(frame, "Popup okno", true);
+        mojDialog.setSize(400, 300);
+        mojDialog.setVisible(true);*/
 
-        frame.setMinimumSize(new Dimension(450, 320)); // Rozmery okna
+        frame.setMinimumSize(new Dimension(450, 330)); // Rozmery okna
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // Ked kliknem na X na okne (cize vo frame) tak sa zatvori standardne
         frame.setLocationRelativeTo(null); // Vycentrovanie okna
 
@@ -101,6 +104,9 @@ public class GUI {
         JTextField txfNazov = new JTextField();
         txfNazov.setBounds(10, 20, 100, 30); // x, y, sirka, vyska
         txfNazov.setHorizontalAlignment(JTextField.RIGHT);
+
+        //PromptSupport.setPrompt("Zadaj názov", txfNazov);
+
         panel.add(txfNazov);
 
         JTextField txfCena = new JTextField();
@@ -115,7 +121,7 @@ public class GUI {
         panel.add(txfKategoria);
 
         JTextField txfDatum = new JTextField();
-        txfDatum.setBounds(340, 20, 100, 30); // x, y, sirka, vyska
+        txfDatum.setBounds(335, 20, 100, 30); // x, y, sirka, vyska
         txfDatum.setHorizontalAlignment(JTextField.RIGHT);
         panel.add(txfDatum);
 
@@ -160,7 +166,53 @@ public class GUI {
         btnNovy.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Vyprazdnime hore formular pre vstupne udaje
+                // Vytvarame dialog, ktory patri rodicovskemu jFrame, teda v nasom pripade premennej frame.
+                // Nastavili sme zaroven jeho titulok na "novy zaznam" a treti parameter urcuje, ci je okno modalne (true) alebo nie (false)
+                JDialog popupOkno = new JDialog(frame, "Nový záznam", true);
+                popupOkno.setSize(400,300);
+                popupOkno.setLocationRelativeTo(frame); // Vycentrovanie okna voci frame
+
+                JPanel panelDialog = new JPanel();
+                // Layout je nastaveny na null, cize komponenty v jDialogu nastavujeme cez setBounds
+                panelDialog.setLayout(new FlowLayout());
+// Do JDialogu s nazvom popupOkno sme pridali panelDialog prostrednictvom metody setContentPane
+                popupOkno.setContentPane(panelDialog);
+                panelDialog.setBackground(Color.GRAY);
+
+                popupOkno.setLayout(new FlowLayout()); // Layout je nastaveny na null, cize komponenty v jDialogu nastavujeme cez setBounds
+
+                // Vytvarame jTextField pre jDialog
+                JTextField txfNazovDialog = new JTextField(5);
+               // txfNazovDialog.setBounds(50,30,100,20);
+                // Pridame txfNazovDialog do popupOkno
+                panelDialog.add(txfNazovDialog);
+
+
+              //  txfNazovDialog.setText(txfNazov.getText());
+
+                JTextField txfCenaDialog = new JTextField(5);
+                panelDialog.add(txfCenaDialog);
+
+                JTextField txfKategoriaDialog = new JTextField(5);
+                panelDialog.add(txfKategoriaDialog);
+
+                JTextField txfDatumDialog = new JTextField(5);
+                panelDialog.add(txfDatumDialog);
+
+                JTextField txfTempDialog = new JTextField(5);
+                panelDialog.add(txfTempDialog);
+
+                // TODO vytvorit tlacidlo Ulozit na ulozenie noveho zaznamu
+                // TODO Vytvorime ActionListener na tlacidlo Ulozit
+                // V metode actionPerformed musime urobit toto
+                // Vytvorit objekt Naklad s nazvom novyNaklad, kde vlozime vsetky hodnoty jTextField z jDialog
+                // a tento objekt novyNaklad pridame do jListe cez DefaultListModel takto: modelZoznamu.addElement(novyNaklad);
+
+                // Zobrazime jDialog
+                popupOkno.setVisible(true);
+
+
+       /*         // Vyprazdnime hore formular pre vstupne udaje
                 txfNazov.setText(""); // Vymaze obsah jTextField pre nazov
                 txfKategoria.setText(""); // Vymaze obsah jTextField pre kategoria
                 txfCena.setText(""); // Vymaze obsah jTextField pre cena
@@ -171,12 +223,12 @@ public class GUI {
                 txfCena.setBorder(new LineBorder(Color.BLUE, 2));
                 txfDatum.setBorder(new LineBorder(Color.BLUE, 2));
 
-                btnNovy.setEnabled(false);
+                btnNovy.setEnabled(false);*/
             }
         });
 
         JButton btnUloz = new JButton("Pridaj do zoznamu"); // tlacidlo
-        btnUloz.setBounds(100, 240, 90, 20); // x, y, sirka, vyska
+        btnUloz.setBounds(100, 240, 110, 20); // x, y, sirka, vyska
         panel.add(btnUloz);
         btnUloz.addActionListener(new ActionListener() {
             @Override
@@ -190,7 +242,7 @@ public class GUI {
         });
 
         JButton btnAktualizuj = new JButton("Aktualizuj"); // tlacidlo
-        btnAktualizuj.setBounds(200, 240, 80, 20); // x, y, sirka, vyska
+        btnAktualizuj.setBounds(220, 240, 90, 20); // x, y, sirka, vyska
         panel.add(btnAktualizuj);
 
         btnAktualizuj.addActionListener(new ActionListener() { // sluzi na "odchytenie" cize spracovanie zatlacenia tlacidla
@@ -205,7 +257,7 @@ public class GUI {
 
 
         JButton btnCancel = new JButton("Cancel");
-        btnCancel.setBounds(290, 240, 80, 20);
+        btnCancel.setBounds(320, 240, 80, 20);
         panel.add(btnCancel);
 
         btnCancel.addActionListener(new ActionListener() {
