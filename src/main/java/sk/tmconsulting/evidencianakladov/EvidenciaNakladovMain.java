@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class EvidenciaNakladovMain {
     public static void main(String[] args) {
+
 /*        // Vytvorime si objekt s nazvom naklad1
         Naklad naklad1 = new Naklad();
         naklad1.setNazov("Nákup potravín");
